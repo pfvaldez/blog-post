@@ -4,8 +4,8 @@ import urllib.request
 from perceptron_classifier import PerceptronClassifier
 
 # Download Iris Data Set from http://archive.ics.uci.edu/ml/datasets/Iris
-url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
-urllib.request.urlretrieve(url, 'iris.data')
+URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+urllib.request.urlretrieve(URL, 'iris.data')
 # Use pandas.read_csv module to load iris data set
 # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
 IRIS_DATA = pd.read_csv('iris.data', header=None)

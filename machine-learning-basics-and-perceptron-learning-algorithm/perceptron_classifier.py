@@ -4,22 +4,22 @@ class PerceptronClassifier:
     '''Preceptron Binary Classifier uses Perceptron Learning Algorithm
         to do classification with two classes.
 
-        Parameters
-        ----------
-        number_of_attributes : int
-            The number of attributes of data set.
+    Parameters
+    ----------
+    number_of_attributes : int
+        The number of attributes of data set.
 
-        class_labels : tuple of the class labels
-            The class labels can be anything as long as it has only two types of labels.
+    class_labels : tuple of the class labels
+        The class labels can be anything as long as it has only two types of labels.
 
-        Attributes
-        ----------
-        weights : list of float
-            The list of weights corresponding input attributes.
+    Attributes
+    ----------
+    weights : list of float
+        The list of weights corresponding input attributes.
 
-        errors_trend : list of int
-            The number of misclassification for each training sample.
-        '''
+    errors_trend : list of int
+        The number of misclassification for each training sample.
+    '''
     def __init__(self, number_of_attributes: int, class_labels: ()):
         # Initialize the weights to zero
         # The size is the number of attributes plus the bias, i.e. x_0 * w_0
@@ -29,8 +29,8 @@ class PerceptronClassifier:
         self.misclassify_record = []
 
         # Build the label map to map the original labels to numerical labels
-        # For example, ['a', 'b'] -> {0 : 'a', 1 : 'b'}
-        self._label_map = {1 : class_labels[0], -1 : class_labels[1]}
+        # For example, ['a', 'b'] -> {0: 'a', 1: 'b'}
+        self._label_map = {1: class_labels[0], -1: class_labels[1]}
         self._reversed_label_map = {class_labels[0]: 1, class_labels[1]: -1}
 
     def _linear_combination(self, sample):

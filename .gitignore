@@ -134,3 +134,4 @@ ENV/
 *.exe
 *.out
 *.app
+.vscode/settings.json
