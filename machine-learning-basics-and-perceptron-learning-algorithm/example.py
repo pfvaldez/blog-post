@@ -57,17 +57,17 @@ VERIFY = np.append(SETOSA_VERIFY, VERSICOLOR_VERIFY)
 VERIFY = np.append(VERIFY, VIRGINICA_VERIFY)
 
 # Define a setosa-versicolor Perceptron() with 2 attributes
-perceptron_setosa_versicolor = PerceptronClassifier(2)
+perceptron_setosa_versicolor = PerceptronClassifier(2, ('Iris-setosa', 'Iris-versicolor'))
 # Train the model
 perceptron_setosa_versicolor.train(SETOSA_VERSICOLOR_TRAINING_DATA, SETOSA_VERSICOLOR_TRAINING_LABEL)
 
 # Define a setosa-virginica Perceptron() with 2 attributes
-perceptron_setosa_virginica = PerceptronClassifier(2)
+perceptron_setosa_virginica = PerceptronClassifier(2, ('Iris-setosa', 'Iris-virginica'))
 # Train the model
 perceptron_setosa_virginica.train(SETOSA_VIRGINICA_TRAINING_DATA, SETOSA_VIRGINICA_TRAINING_LABEL)
 
 # Define a versicolor-virginica Perceptron() with 2 attributes
-perceptron_versicolor_virginica = PerceptronClassifier(2)
+perceptron_versicolor_virginica = PerceptronClassifier(2, ('Iris-versicolor', 'Iris-virginica'))
 # Train the model
 perceptron_versicolor_virginica.train(VERSICOLOR_VIRGINICA_TRAINING_DATA, VERSICOLOR_VIRGINICA_TRAINING_LABEL)
 

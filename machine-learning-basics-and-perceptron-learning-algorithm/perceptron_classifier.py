@@ -9,24 +9,29 @@ class PerceptronClassifier:
         number_of_attributes : int
             The number of attributes of data set.
 
+        class_labels : tuple of the class labels
+            The class labels can be anything as long as it has only two types of labels.
+
         Attributes
         ----------
         weights : list of float
-            The list of weights corresponding &amp;lt;g class="gr_ gr_313 gr-alert gr_gramm gr_inline_cards gr_run_anim Grammar multiReplace" id="313" data-gr-id="313"&amp;gt;with&amp;lt;/g&amp;gt; input attributes.
+            The list of weights corresponding input attributes.
 
         errors_trend : list of int
             The number of misclassification for each training sample.
         '''
-    def __init__(self, number_of_attributes: int):
-        # Initialize the weigths to zero
+    def __init__(self, number_of_attributes: int, class_labels: ()):
+        # Initialize the weights to zero
         # The size is the number of attributes plus the bias, i.e. x_0 * w_0
         self.weights = np.zeros(number_of_attributes + 1)
 
         # Record of the number of misclassify for each train sample
         self.misclassify_record = []
 
-        self._label_map = {}
-        self._reversed_label_map = {}
+        # Build the label map to map the original labels to numerical labels
+        # For example, ['a', 'b'] -> {0 : 'a', 1 : 'b'}
+        self._label_map = {1 : class_labels[0], -1 : class_labels[1]}
+        self._reversed_label_map = {class_labels[0]: 1, class_labels[1]: -1}
 
     def _linear_combination(self, sample):
         '''linear combination of sample and weights'''
@@ -40,22 +45,17 @@ class PerceptronClassifier:
         samples : two dimensions list
             Training data set
         labels : list of labels
-            Class labels. The labels can be anything as long as it has only two types of labels.
+            The class labels of the training data
         max_iterator : int
             The max iterator to stop the training process
             in case the training data is not converaged.
         '''
-        # Build the label map to map the original labels to numerical labels
-        # For example, ['a', 'b', 'c'] -&amp;gt; {0 : 'a', 1 : 'b', 2 : 'c'}
-        self._label_map = {1 : list(set(labels))[0], -1 : list(set(labels))[1]}
-        self._reversed_label_map = {value : key for key, value in self._label_map.items()}
-
         # Transfer the labels to numerical labels
-        transfered_labels = [self._reversed_label_map[index] for index in labels]
+        transferred_labels = [self._reversed_label_map[index] for index in labels]
 
         for _ in range(max_iterator):
             misclassifies = 0
-            for sample, target in zip(samples, transfered_labels):
+            for sample, target in zip(samples, transferred_labels):
                 linear_combination = self._linear_combination(sample)
                 update = target - np.where(linear_combination >= 0.0, 1, -1)
 
