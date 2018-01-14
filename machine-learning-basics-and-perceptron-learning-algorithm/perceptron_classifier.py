@@ -2,12 +2,12 @@ import numpy as np
 
 class PerceptronClassifier:
     '''Preceptron Binary Classifier uses Perceptron Learning Algorithm
-        to do classification with two classes.
+        to  classify two classes data.
 
     Parameters
     ----------
     number_of_attributes : int
-        The number of attributes of data set.
+        The number of attributes of the data set.
 
     class_labels : tuple of the class labels
         The class labels can be anything as long as it has only two types of labels.
@@ -17,7 +17,7 @@ class PerceptronClassifier:
     weights : list of float
         The list of weights corresponding input attributes.
 
-    errors_trend : list of int
+    misclassify_record : list of int
         The number of misclassification for each training sample.
     '''
     def __init__(self, number_of_attributes: int, class_labels: ()):
