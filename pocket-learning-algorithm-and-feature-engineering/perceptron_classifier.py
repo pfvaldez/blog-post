@@ -25,7 +25,7 @@ class PerceptronClassifier:
         # The size is the number of attributes plus the bias, i.e. x_0 * w_0
         self.weights = np.zeros(number_of_attributes + 1)
 
-        # Record of the number of misclassify for each train sample
+        # Record of the number of misclassify for each training sample
         self.misclassify_record = []
 
         # Build the label map to map the original labels to numerical labels
