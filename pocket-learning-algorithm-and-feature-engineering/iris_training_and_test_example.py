@@ -12,20 +12,14 @@
 # pandas is an open source library providing high-performance, 
 # easy-to-use data structures and data analysis tools. http://pandas.pydata.org/
 import pandas
-import numpy as np
 
-# matplotlib is a python 2D plotting library which produces publication quality 
-# figures in a variety of hardcopy formats and interactive environments across platforms.
-# http://matplotlib.org/2.0.0/index.html
-from matplotlib import pyplot
-
-from perceptron_classifier import PerceptronClassifier
+# scikit-learn is a python machine learning library. train_test_split function splits a data set to
+# a train and a test subsets.
+# http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
 from sklearn.model_selection import train_test_split
 
-import seaborn as sns
 import urllib.request
-
-sns.set()
+from perceptron_classifier import PerceptronClassifier
 
 # Download Iris Data Set from http://archive.ics.uci.edu/ml/datasets/Iris
 url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
@@ -34,21 +28,21 @@ urllib.request.urlretrieve(url, 'iris.data')
 # Note: the iris.data is headerless, so header is None.
 IRIS_DATA = pandas.read_csv('iris.data', header=None)
 
+# Try only versicolor and virginica
 LABELS = IRIS_DATA.iloc[50:150, 4].values
 DATA = IRIS_DATA.iloc[50:150, [0, 2]].values
 
+# Use scikit-learn's train_test_split function to separate the Iris Data Set
+# to a training subset (75% of the data) and a test subst (25% of the data)
 DATA_TRAIN, DATA_TEST, LABELS_TRAIN, LABELS_TEST = train_test_split(DATA, LABELS, test_size=0.25, random_state=1000)
 
 perceptron_classifier = PerceptronClassifier(2, ('Iris-versicolor', 'Iris-virginica'))
 perceptron_classifier.train(DATA_TRAIN, LABELS_TRAIN, 100)
-print(perceptron_classifier.misclassify_record)
-
 result = perceptron_classifier.classify(DATA_TEST)
 
 misclassify = 0
 for predict, answer in zip(result, LABELS_TEST):
     if predict != answer:
         misclassify += 1
-    print(str(predict) + " " + str(answer))
-print(misclassify)
-print("Accuracy rate: " + str((len(result) - misclassify) / len(result)) + "%") 
+
+print("Accuracy rate: %2.2f" % (100 * (len(result) - misclassify) / len(result)) + "%") 
