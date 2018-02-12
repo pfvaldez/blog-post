@@ -1,5 +1,4 @@
 from sklearn import preprocessing
-import csv
 import numpy as np
 import pandas as pd
 import urllib.request
@@ -10,10 +9,10 @@ def imputer_by_most_frequent(missing_values=np.nan, data=[]):
 
     Parameters
     ----------
-    missing_values :
+    missing_values:
         The missing value can be np.nan, '?', or whatever character which indicates missing value.
 
-    data : one dimension list
+    data: one dimension list
 
     Return
     ------
@@ -32,8 +31,6 @@ if __name__ == '__main__':
     # Download Japanese Credit Data Set from http://archive.ics.uci.edu/ml/datasets/Japanese+Credit+Screening
     URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.data'
     urllib.request.urlretrieve(URL, 'crx.data')
-    # Use pandas.read_csv module to load adult data set
-    # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
 
     # Use the input by most frequent approach to input the missing values in A1
     # A1:   b, a
