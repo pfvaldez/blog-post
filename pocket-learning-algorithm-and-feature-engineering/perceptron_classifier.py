@@ -6,18 +6,18 @@ class PerceptronClassifier:
 
     Parameters
     ----------
-    number_of_attributes : int
+    number_of_attributes: int
         The number of attributes of the data set.
 
-    class_labels : tuple of the class labels
+    class_labels: tuple of the class labels
         The class labels can be anything as long as it has only two types of labels.
 
     Attributes
     ----------
-    weights : list of float
+    weights: list of float
         The list of weights corresponding input attributes.
 
-    misclassify_record : list of int
+    misclassify_record: list of int
         The number of misclassification for each training sample.
     '''
     def __init__(self, number_of_attributes: int, class_labels: ()):
@@ -25,7 +25,7 @@ class PerceptronClassifier:
         # The size is the number of attributes plus the bias, i.e. x_0 * w_0
         self.weights = np.zeros(number_of_attributes + 1)
 
-        # Record of the number of misclassify for each train sample
+        # Record of the number of misclassify for each training sample
         self.misclassify_record = []
 
         # Build the label map to map the original labels to numerical labels
@@ -42,11 +42,11 @@ class PerceptronClassifier:
 
         Parameters
         ----------
-        samples : two dimensions list
+        samples: two dimensions list
             Training data set
         labels : list of labels
             The class labels of the training data
-        max_iterator : int
+        max_iterator: int
             The max iterator to stop the training process
             in case the training data is not converaged.
         '''
@@ -75,7 +75,7 @@ class PerceptronClassifier:
 
         Parameters
         ----------
-        new_data : two dimensions list
+        new_data: two dimensions list
             New data to be classified
 
         Return

@@ -1,3 +1,5 @@
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from sklearn import preprocessing
 from pocket_classifier import PocketClassifier
 from perceptron_classifier import PerceptronClassifier
@@ -5,10 +7,6 @@ import csv
 import numpy as np
 import pandas as pd
 import urllib.request
-from matplotlib import pyplot
-import seaborn as sns
-
-sns.set()
 
 # Download Japanese Credit Data Set from http://archive.ics.uci.edu/ml/datasets/Japanese+Credit+Screening
 URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.data'
@@ -27,23 +25,6 @@ with open('crx.data')  as csv_file:
         writer.writerow(row)
 
 # 2. Transfer the following category data to numerical data:
-# A1:   b, a.
-# A2:   continuous.
-# A3:   continuous.
-# A4:   u, y, l, t.
-# A5:   g, p, gg.
-# A6:   c, d, cc, i, j, k, m, r, q, w, x, e, aa, ff.
-# A7:   v, h, bb, j, n, z, dd, ff, o.
-# A8:   continuous.
-# A9:   t, f.
-#A10:   t, f.
-#A11:   continuous.
-#A12:   t, f.
-#A13:   g, p, s.
-#A14:   continuous.
-#A15:   continuous.
-#A16:   +,-         (class attribute)
-
 CRX_DATA = pd.read_csv('crx_nomissing.csv', header=None)
 
 # Use scikit-learn's LabelEncoder to encode category data to numerical data.
@@ -89,31 +70,17 @@ for idx in range(A1.size):
 # http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Normalizer.html
 data_normalized = preprocessing.normalize(data)
 
-pocket_classifier_normalized = PocketClassifier(15, ('+', '-'))
-pocket_classifier_normalized.train(data_normalized, label, 100)
-pyplot.plot(pocket_classifier_normalized.misclassify_record, color='blue', label='Pocket (Normalized)')
+# FIXME should be before normalization???
+DATA_TRAIN, DATA_TEST, LABELS_TRAIN, LABELS_TEST = train_test_split(data_normalized, label, test_size=0.25, random_state=1000)
 
-# Compare to the non-normalized data.
 pocket_classifier = PocketClassifier(15, ('+', '-'))
-pocket_classifier.train(data, label, 100)
-pyplot.plot(pocket_classifier.misclassify_record, color='green', label='Pocket (Non-normalized)')
+pocket_classifier.train(DATA_TRAIN, LABELS_TRAIN, 100)
 
-# Compare to the Perceptron Learning Algorithm with both normalized and non-normalized data
-perceptron_classifier_normalized = PerceptronClassifier(15, ('+', '-'))
-perceptron_classifier_normalized.train(data_normalized, label, 100)
-pyplot.plot(perceptron_classifier_normalized.misclassify_record, color='red', label='Perceptron (Normalized)')
+result = pocket_classifier.classify(DATA_TEST)
 
-perceptron_classifier = PerceptronClassifier(15, ('+', '-'))
-perceptron_classifier.train(data, label, 100)
-pyplot.plot(perceptron_classifier.misclassify_record, color='yellow', label='Perceptron (Non-normalized)')
-
-# Plot the error rate and show it never converges
-pyplot.xlabel('number of iteration')
-pyplot.ylabel('number of misclassification')
-pyplot.legend(loc='center right')
-pyplot.show()
-
-
-
-
+misclassify = 0
+for predict, answer in zip(result, LABELS_TEST):
+    if predict != answer:
+        misclassify += 1
+print("Accuracy rate: " + str((len(result) - misclassify) / len(result)) + "%") 
 
