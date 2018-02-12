@@ -1,5 +1,4 @@
 from sklearn import preprocessing
-import csv
 import numpy as np
 import pandas as pd
 import urllib.request
@@ -9,7 +8,7 @@ def one_hot_encoder(data=[]):
 
     Parameters
     ----------
-    data : one dimension list
+    data: one dimension list
 
     Return
     ------
@@ -33,8 +32,6 @@ if __name__ == '__main__':
     # Download the Japanese Credit Data Set from http://archive.ics.uci.edu/ml/datasets/Japanese+Credit+Screening
     URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.data'
     urllib.request.urlretrieve(URL, 'crx.data')
-    # Use pandas.read_csv module to load adult data set
-    # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
 
     # Use one-hot encoding to transfer the A9 attribute of the Japanese Credit Data Set
     # A9:   t, f.

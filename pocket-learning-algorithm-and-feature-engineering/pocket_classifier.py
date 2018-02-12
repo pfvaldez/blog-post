@@ -6,7 +6,7 @@ class Pocket:
 
     Parameters
     ----------
-    number_of_attributes : int
+    number_of_attributes: int
         The number of attributes of the data set.
 
     Attributes
@@ -27,22 +27,22 @@ class PocketClassifier:
 
     Parameters
     ----------
-    number_of_attributes : int
+    number_of_attributes: int
         The number of attributes of the data set.
 
-    class_labels : tuple of the class labels
+    class_labels: tuple of the class labels
         The class labels can be anything as long as it has only two types of labels.
 
     Attributes
     ----------
     pocket: Pocket
         The pocket contains the best training result so far and
-        the number of misclassified sample according to the result in the pocket.
+        the number of the misclassified sample according to the result in the pocket.
 
-    weights : list of float
+    weights: list of float
         The list of weights corresponding input attributes.
 
-    misclassify_record : list of int
+    misclassify_record: list of int
         The number of misclassification for each training sample.
     '''
     def __init__(self, number_of_attributes: int, class_labels: ()):
@@ -69,11 +69,11 @@ class PocketClassifier:
 
         Parameters
         ----------
-        samples : two dimensions list
+        samples: two dimensions list
             Training data set
-        labels : list of labels
+        labels: list of labels
             The class labels of the training data
-        max_iterator : int
+        max_iterator: int
             The max iterator to stop the training process.
         '''
          # Transfer the labels to numerical labels
@@ -109,7 +109,7 @@ class PocketClassifier:
 
         Parameters
         ----------
-        new_data : two dimensions list
+        new_data: two dimensions list
             New data to be classified
 
         Return

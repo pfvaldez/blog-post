@@ -30,10 +30,10 @@ def imputer_by_most_frequent(missing_values=np.nan, data=[]):
 
     Parameters
     ----------
-    missing_values :
+    missing_values:
         The missing value can be np.nan, '?', or whatever character which indicates missing value.
 
-    data : one dimension list
+    data: one dimension list
 
     Return
     ------
@@ -53,7 +53,7 @@ def one_hot_encoder(data=[]):
 
     Parameters
     ----------
-    data : one dimension list
+    data: one dimension list
 
     Return
     ------
